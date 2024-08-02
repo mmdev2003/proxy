@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+
+  second_backend:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: second_backend
+    env_file: ../.env
+    ports:
+      - "8100:8100"
+    restart: unless-stopped
+
+  second_caddy:
+    image: caddy:2.7.6
+    restart: unless-stopped
+    container_name: second_caddy
+    ports:
+      - "80:80"
+    #  - "443:443"
+    volumes:
+      - "./docker/caddy:/etc/caddy"

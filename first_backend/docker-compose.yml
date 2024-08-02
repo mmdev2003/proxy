@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+
+  first_backend:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: first_backend
+    env_file: ../.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  first_caddy:
+    image: caddy:2.7.6
+    restart: unless-stopped
+    container_name: first_caddy
+    ports:
+      - "80:80"
+    #  - "443:443"
+    volumes:
+      - "./docker/caddy:/etc/caddy"
+
+  db:
+    image: postgres:15.4-alpine
+    container_name: db
+    env_file: ../.env
+    restart: unless-stopped

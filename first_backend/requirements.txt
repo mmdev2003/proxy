@@ -1,0 +1,11 @@
+fastapi
+requests
+cryptocode
+uvicorn
+asyncpg
+python-dotenv
+loguru
+aiohttp
+SQLAlchemy
+
+
